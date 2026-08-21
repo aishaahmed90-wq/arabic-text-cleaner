@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Arabic Word Counter - Count Words and Characters Online</title>
+
+  <meta
+    name="description"
+    content="Free Arabic word counter to count words, characters, and lines in Arabic text online instantly."
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>Arabic Text Tools</h1>
+
+    <nav>
+      <a href="index.html">Text Cleaner</a>
+      <a href="remove-tashkeel.html">Remove Tashkeel</a>
+      <a href="arabic-word-counter.html">Word Counter</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <h2>Arabic Word Counter</h2>
+
+    <p>
+      Count Arabic words, characters, and lines instantly.
+      Paste your text below and the results will update automatically.
+    </p>
+
+    <textarea
+      id="textInput"
+      placeholder="Paste Arabic text here..."
+      dir="rtl"
+    ></textarea>
+
+    <section>
+      <h3>Text Statistics</h3>
+
+      <p>
+        Words:
+        <strong id="wordCount">0</strong>
+      </p>
+
+      <p>
+        Characters:
+        <strong id="characterCount">0</strong>
+      </p>
+
+      <p>
+        Characters without spaces:
+        <strong id="characterNoSpaceCount">0</strong>
+      </p>
+
+      <p>
+        Lines:
+        <strong id="lineCount">0</strong>
+      </p>
+
+    </section>
+
+    <button id="clearBtn">Clear Text</button>
+
+    <section>
+      <h3>How does the Arabic Word Counter work?</h3>
+
+      <p>
+        The tool analyzes the text you paste and instantly calculates
+        the number of words, characters, characters without spaces,
+        and lines.
+      </p>
+
+      <p>
+        It works directly in your browser and does not require
+        uploading your text to a server.
+      </p>
+    </section>
+
+    <section>
+      <h3>Other Arabic Text Tools</h3>
+
+      <p>
+        <a href="index.html">Arabic Text Cleaner</a>
+      </p>
+
+      <p>
+        <a href="remove-tashkeel.html">
+          Remove Tashkeel from Arabic Text
+        </a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Arabic Text Tools</p>
+  </footer>
+
+  <script>
+
+    const textInput =
+      document.getElementById("textInput");
+
+    const wordCount =
+      document.getElementById("wordCount");
+
+    const characterCount =
+      document.getElementById("characterCount");
+
+    const characterNoSpaceCount =
+      document.getElementById("characterNoSpaceCount");
+
+    const lineCount =
+      document.getElementById("lineCount");
+
+    const clearBtn =
+      document.getElementById("clearBtn");
+
+
+    function updateCounts() {
+
+      const text = textInput.value;
+
+      const trimmedText = text.trim();
+
+      const words =
+        trimmedText === ""
+          ? []
+          : trimmedText.split(/\s+/);
+
+      wordCount.textContent =
+        words.length;
+
+      characterCount.textContent =
+        text.length;
+
+      characterNoSpaceCount.textContent =
+        text.replace(/\s/g, "").length;
+
+      lineCount.textContent =
+        text === ""
+          ? 0
+          : text.split(/\r\n|\r|\n/).length;
+    }
+
+
+    textInput.addEventListener(
+      "input",
+      updateCounts
+    );
+
+
+    clearBtn.addEventListener(
+      "click",
+      function () {
+
+        textInput.value = "";
+
+        updateCounts();
+
+        textInput.focus();
+      }
+    );
+
+  </script>
+
+</body>
+</html>
