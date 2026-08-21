@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Remove Arabic Tashkeel Online - Free Arabic Diacritics Remover</title>
+
+  <meta
+    name="description"
+    content="Remove tashkeel and harakat from Arabic text online for free. Paste Arabic text and instantly remove Arabic diacritics without changing the original letters."
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>Arabic Text Tools</h1>
+
+    <nav>
+      <a href="index.html">Text Cleaner</a>
+      <a href="remove-tashkeel.html">Remove Tashkeel</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <h2>Remove Tashkeel from Arabic Text</h2>
+
+    <p>
+      Remove Arabic tashkeel, harakat, and diacritics instantly.
+      This tool removes the diacritics while keeping the original
+      Arabic letters unchanged.
+    </p>
+
+    <textarea
+      id="tashkeelInput"
+      placeholder="Paste Arabic text with tashkeel here..."
+      dir="rtl"
+    ></textarea>
+
+    <button id="removeTashkeelBtn">
+      Remove Tashkeel
+    </button>
+
+    <textarea
+      id="tashkeelOutput"
+      placeholder="Text without tashkeel will appear here..."
+      dir="rtl"
+      readonly
+    ></textarea>
+
+    <button id="copyBtn">
+      Copy Result
+    </button>
+
+
+    <section>
+
+      <h3>What does this tool remove?</h3>
+
+      <p>
+        The tool removes Arabic diacritical marks such as fatha,
+        damma, kasra, sukun, shadda, and tanween.
+      </p>
+
+      <p>
+        It does not change Arabic letters or words. Only the
+        tashkeel is removed.
+      </p>
+
+    </section>
+
+
+    <section>
+
+      <h3>Example</h3>
+
+      <p>
+        Before:
+        <strong>السَّلَامُ عَلَيْكُمْ</strong>
+      </p>
+
+      <p>
+        After:
+        <strong>السلام عليكم</strong>
+      </p>
+
+    </section>
+
+
+    <section>
+
+      <h3>Other Arabic Text Tools</h3>
+
+      <p>
+        <a href="index.html">
+          Arabic Text Cleaner
+        </a>
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    <p>© 2026 Arabic Text Tools</p>
+  </footer>
+
+
+  <script>
+
+    const removeButton =
+      document.getElementById("removeTashkeelBtn");
+
+    const copyButton =
+      document.getElementById("copyBtn");
+
+
+    removeButton.addEventListener("click", function () {
+
+      const input =
+        document.getElementById("tashkeelInput").value;
+
+      // Remove Arabic tashkeel / diacritics
+      const result = input.replace(
+        /[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]/g,
+        ""
+      );
+
+      document.getElementById("tashkeelOutput").value =
+        result;
+
+    });
+
+
+    copyButton.addEventListener("click", async function () {
+
+      const output =
+        document.getElementById("tashkeelOutput").value;
+
+      if (!output) {
+        return;
+      }
+
+      try {
+
+        await navigator.clipboard.writeText(output);
+
+        copyButton.textContent = "Copied!";
+
+        setTimeout(function () {
+          copyButton.textContent = "Copy Result";
+        }, 1500);
+
+      } catch (error) {
+
+        console.error("Unable to copy text:", error);
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
