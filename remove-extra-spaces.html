@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Remove Extra Spaces from Arabic Text Online</title>
+
+  <meta
+    name="description"
+    content="Free online tool to remove extra spaces from Arabic text and clean unnecessary whitespace instantly."
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <header>
+    <h1>Arabic Text Tools</h1>
+
+    <nav>
+      <a href="index.html">Text Cleaner</a>
+      <a href="remove-tashkeel.html">Remove Tashkeel</a>
+      <a href="arabic-word-counter.html">Word Counter</a>
+      <a href="remove-extra-spaces.html">Remove Extra Spaces</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <h2>Remove Extra Spaces from Arabic Text</h2>
+
+    <p>
+      Clean Arabic text by removing repeated spaces and unnecessary
+      whitespace while keeping the text itself unchanged.
+    </p>
+
+    <textarea
+      id="spaceInput"
+      placeholder="Paste Arabic text here..."
+      dir="rtl"
+    ></textarea>
+
+    <button id="removeSpacesBtn">
+      Remove Extra Spaces
+    </button>
+
+    <textarea
+      id="spaceOutput"
+      placeholder="Clean text will appear here..."
+      dir="rtl"
+      readonly
+    ></textarea>
+
+    <button id="copyBtn">
+      Copy Result
+    </button>
+
+    <section>
+      <h3>What does this tool do?</h3>
+
+      <p>
+        This tool removes repeated spaces between words and trims
+        unnecessary spaces from the beginning and end of the text.
+      </p>
+
+      <p>
+        It does not change Arabic letters, words, or tashkeel.
+      </p>
+    </section>
+
+    <section>
+      <h3>Example</h3>
+
+      <p>
+        Before:
+        <strong>هذا&nbsp;&nbsp;&nbsp;&nbsp;نص&nbsp;&nbsp;&nbsp;عربي</strong>
+      </p>
+
+      <p>
+        After:
+        <strong>هذا نص عربي</strong>
+      </p>
+    </section>
+
+    <section>
+      <h3>Other Arabic Text Tools</h3>
+
+      <p>
+        <a href="index.html">Arabic Text Cleaner</a>
+      </p>
+
+      <p>
+        <a href="remove-tashkeel.html">
+          Remove Tashkeel from Arabic Text
+        </a>
+      </p>
+
+      <p>
+        <a href="arabic-word-counter.html">
+          Arabic Word Counter
+        </a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Arabic Text Tools</p>
+  </footer>
+
+  <script>
+
+    const input =
+      document.getElementById("spaceInput");
+
+    const output =
+      document.getElementById("spaceOutput");
+
+    const removeSpacesBtn =
+      document.getElementById("removeSpacesBtn");
+
+    const copyBtn =
+      document.getElementById("copyBtn");
+
+
+    removeSpacesBtn.addEventListener(
+      "click",
+      function () {
+
+        const cleanedText = input.value
+          .replace(/[ \t]+/g, " ")
+          .replace(/ *\n */g, "\n")
+          .trim();
+
+        output.value = cleanedText;
+      }
+    );
+
+
+    copyBtn.addEventListener(
+      "click",
+      async function () {
+
+        if (!output.value) {
+          return;
+        }
+
+        try {
+
+          await navigator.clipboard.writeText(
+            output.value
+          );
+
+          copyBtn.textContent = "Copied!";
+
+          setTimeout(function () {
+            copyBtn.textContent = "Copy Result";
+          }, 1500);
+
+        } catch (error) {
+
+          console.error(
+            "Unable to copy text:",
+            error
+          );
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
